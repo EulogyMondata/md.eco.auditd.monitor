@@ -1,0 +1,6 @@
+# Preserve executable permissions for shell scripts
+*.sh text eol=lf
+install.sh export-subst
+quick-install.sh export-subst
+check-install.sh export-subst
+uninstall.sh export-subst

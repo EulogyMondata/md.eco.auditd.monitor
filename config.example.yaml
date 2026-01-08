@@ -1,0 +1,36 @@
+# Configuration pour Auditd Monitor
+
+# Fichier de log à surveiller
+# Exemples courants:
+#   - Ubuntu/Debian: /var/log/syslog
+#   - RHEL/CentOS: /var/log/messages
+#   - Certains systèmes: /var/log/audit/audit.log
+log_file: /var/log/syslog
+
+# Nom du service audit à redémarrer
+# Exemples courants:
+#   - La plupart des systèmes: auditd
+#   - Certains systèmes: audit
+audit_service: auditd
+
+# Intervalle de vérification en secondes
+# À quelle fréquence vérifier si auditd écrit dans les logs
+check_interval: 60
+
+# Seuil d'inactivité en secondes
+# Redémarrer auditd si aucune entrée depuis ce délai
+inactivity_threshold: 300
+
+# Motif regex pour identifier les entrées auditd dans les logs
+# Les logs auditd ont une signature caractéristique avec type=EXECVE, type=CWD, type=PATH, type=SYSCALL, etc.
+# Ce pattern détecte ces signatures spécifiques
+audit_pattern: "type=(EXECVE|CWD|PATH|SYSCALL|USER_AUTH|USER_CMD|CRED_ACQ|CRED_DISP|LOGIN|USER_START|USER_END|SERVICE_START|SERVICE_STOP|DAEMON_START|DAEMON_END|CONFIG_CHANGE|ANOM_PROMISCUOUS|AVC|SELINUX_ERR|USER_ACCT)"
+
+# Fichier de log pour le monitor lui-même
+monitor_log_file: /var/log/auditd-monitor.log
+
+# Niveau de log (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+log_level: INFO
+
+# Activer le mode dry-run (ne redémarre pas réellement le service)
+dry_run: false

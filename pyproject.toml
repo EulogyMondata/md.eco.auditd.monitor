@@ -1,0 +1,36 @@
+[project]
+name = "auditd-monitor"
+version = "1.0.0"
+description = "Monitor audit logs and restart auditd service when it stops writing"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+license = {text = "MIT"}
+dependencies = [
+    "pyyaml>=6.0",
+    "watchdog>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 100
+target-version = ['py313']
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[project.scripts]
+auditd-monitor = "auditd_monitor.monitor:main"

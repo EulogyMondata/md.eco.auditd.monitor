@@ -1,0 +1,26 @@
+[Unit]
+Description=Auditd Log Monitor Service
+After=network.target auditd.service
+Wants=auditd.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/auditd-monitor
+Environment="PATH=/root/.local/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/root/.local/bin/uv run --project /opt/auditd-monitor python -m auditd_monitor.monitor
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=false
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=false
+ReadWritePaths=/var/log
+
+[Install]
+WantedBy=multi-user.target
